@@ -1,0 +1,54 @@
+<form class="needs-validation" novalidate [formGroup]="form">
+  <div class="card border-primary mb-3">
+    <div class="card-header">
+      <h4>Filial: <small class="text-secondary">{{ form.controls['nome'].value }}</small></h4>
+    </div>
+    <div class="card-body text-primary">
+      <div class="form-row mb-3">
+        <div class="col-sm-12">
+          <label for="codigo">Código</label>
+          <input [readonly]="edit" type="text" class="form-control" id="codigo" placeholder="Código" formControlName="codigo"  [ngClass]="{'is-invalid': submitted && hasError('codigo')}" />
+          <div class="valid-feedback"></div>
+          <div class="invalid-feedback" *ngIf="hasError('codigo') && hasError('codigo')['required']">
+            Por favor informe um código para a filial.
+          </div>
+        </div>
+      </div>
+      <div class="form-row mb-3">
+        <div class="col-sm-12">
+          <label for="nome">Nome</label>
+          <input type="text" class="form-control" id="nome" placeholder="Nome" formControlName="nome" [ngClass]="{ 'is-invalid': submitted && hasError('nome')}" />
+          <div class="valid-feedback"></div>
+          <div class="invalid-feedback" *ngIf="hasError('nome') && hasError('nome')['required']">
+            Por favor informe um nome real para a filial.
+          </div>
+        </div>
+      </div>
+      <div class="form-row mb-3">
+        <div class="col-sm-12" *ngIf="empresas; else loadingEmpresa">
+          <label for="empresaCodigo">Empresa</label>
+          <select class="form-control" id="empresaCodigo" formControlName="empresaCodigo" [ngClass]="{ 'is-invalid': submitted && hasError('empresaCodigo')}">
+            <option *ngFor="let empresa of empresas.data" value= {{empresa.codigo}}>
+              {{empresa.codigo}} - {{empresa.nomeFantasia}}
+            </option>
+          </select>
+          <div class="valid-feedback"></div>
+          <div class="invalid-feedback" *ngIf="hasError('empresaCodigo') && hasError('empresaCodigo')['required']">
+            Por favor informe uma empresa para esta filial.
+          </div>
+        </div>
+        <ng-template #loadingEmpresa>
+          <div class="col-sm-12">
+            <select class="form-control" disabled ></select>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row btn-row form-row-btn">
+    <button class="btn btn-outline-secondary mr-2" (click)="onBack()">Voltar</button>
+    <button class="btn btn-outline-primary" (click)="onSubmit()">Salvar</button>
+  </div>
+
+</form>

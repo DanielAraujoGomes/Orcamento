@@ -1,0 +1,108 @@
+<div class="card">
+  <div class="card-header">
+    <div class="float-left text-primary">
+      <span class="icon icon-office title"></span>
+      <h4 class="title">Empresas</h4>
+    </div>
+    <div class="float-right">
+          <button type="button" class="btn btn-outline-secondary mr-2" [routerLink]="['novo']" tooltip="New record." placement="top">
+            <span class="icon icon-plus "></span>
+          </button>
+          <button type="button" class="btn btn-outline-secondary mr-2" (click)="onRefresh()" tooltip="Refresh List." placement="top">
+            <span class="icon icon-loop2 "></span>
+          </button>
+          <button type="button" class="btn btn-outline-secondary mr-2" (click)="onConfigList()" tooltip="Config List." placement="top">
+            <span class="icon icon-cog "></span>
+          </button>
+          <button type="button" class="btn btn-outline-secondary mr-2" (click)="onRefresh()" tooltip="Carga." placement="top">
+            <span class="icon icon-upload "></span>
+          </button>
+          <button type="button" class="btn btn-outline-secondary mr-2" (click)="onRefresh()" tooltip="Dowload file." placement="top">
+            <span class="icon icon-download "></span>
+          </button>
+          <button type="button" class="btn btn-outline-secondary " [ngClass]="{'active': !isCollapsed}" (click)="isCollapsed = !isCollapsed"
+            [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic" tooltip="Filter." placement="top">
+            <span class="icon icon-filter "></span>
+          </button>
+    </div>
+  </div>
+  <div class="card-body">
+
+    <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true" class="bg-light mb-3 rounded shadow-sm">
+      <form class="needs-validation" novalidate [formGroup]="form">
+        <div class="form-row pr-3 pl-3">
+          <div class="col-sm-4 mb-3">
+            <label class="col-form-label" for="codigo">#</label>
+            <input class="form-control" id="codigo" placeholder="Código" formControlName="codigo" />
+          </div>
+          <div class="col-sm-8 mb-3">
+            <label class="col-form-label" for="nomeFantasia">Empresa</label>
+            <input type="text" class="form-control" id="nomeFantasia" placeholder="Empresa" formControlName="nomeFantasia" />
+          </div>
+        </div>
+        <div class="form-row pr-3 pl-3">
+          <div class="col-sm-12 mb-3 text-right">
+            <button type="button" class="btn btn-outline-success" (click)="onFilterConfirm()">Aplicar Filtro</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <table class="table table-striped mobile-optimised" *ngIf="list; else loading">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Empresa</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fields of list.data">
+          <td data-th="#">{{ fields.codigo }}</td>
+          <td data-th="Empresa">{{ fields.nomeFantasia }}</td>
+          <td>
+            <span class="float-right">
+              <button class="btn btn-outline-info mb-1 btn-sm mr-2" (click)="onEdit(fields.codigo)" tooltip="Edit." placement="top">
+                <span class="icon icon-pencil "></span>
+              </button>
+              <button class="btn btn-outline-danger mb-1 btn-sm" (click)="onDelete(fields.codigo)" tooltip="Delete." placement="top">
+                <span class="icon icon-bin "></span>
+              </button>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #loading>
+      <span>Carregando Empresas...</span>
+    </ng-template>
+  </div>
+  <div class="card-footer text-muted" *ngIf="list">
+    <div class="float-left">
+      <nav aria-label="Page navigation example" *ngIf="list">
+        <ul class="pagination mb-0">
+          <li class="page-item" *ngIf="list.pages.length >= 1">
+            <span class="page-link link-pointer" (click)="onPagination(1)">
+              <<span class="sr-only">(current)</span>
+            </span>
+          </li>
+          <li class="page-item" *ngFor="let page of list.pages" [ngClass]="{'active': page == list.pageNow}" aria-current="page">
+            <span class="page-link" [ngClass]="{'link-pointer': page != list.pageNow}" (click)="onPagination(page)">
+              {{ page }}
+              <span class="sr-only">(current)</span>
+            </span>
+          </li>
+          <li class="page-item"  *ngIf="list.pages.length >= 1">
+            <span class="page-link link-pointer" (click)="onPagination(list.pageCount)">
+              ><span class="sr-only">(current)</span>
+            </span>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="float-right text-primary pagination-ds">
+      {{list.pageNow}} de {{list.pageCount}} paginas ( {{list.regCount}} itens )
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,37 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand navbar-brand-ajuste" href="#">Orçamento</a>
+  <button class="navbar-toggler navbar-icon" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+    aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation"
+    (click)="isCollapsed = !isCollapsed">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" [collapse]=isCollapsed>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="dropdown" dropdown [ngClass]="{'nav-item':!isCollapsed}">
+        <span id="button-menu-dividers" dropdownToggle type="button"
+          class="dropdown-toggle dropdown-toggle-menu nav-link" aria-controls="dropdown-menu-dividers">
+          Cadastros <span class="caret"></span>
+        </span>
+        <ul id="dropdown-menu-dividers" *dropdownMenu class="dropdown-menu dropdown-menu-md" role="menu"
+          aria-labelledby="button-menu-dividers">
+          <li role="menuitem"><a class="dropdown-item dropdown-item-md" [routerLink]="['/empresas']"
+              (click)="isCollapsed = true">Empresas</a></li>
+          <li role="menuitem"><a class="dropdown-item dropdown-item-md" [routerLink]="['/filiais']"
+              (click)="isCollapsed = true">Filiais</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container container-body">
+  <router-outlet></router-outlet>
+</div>
+
+<div class="container-fluid fixed-bottom bg-primary">
+  <div class="row row-footer">
+    <div class="col-md-4">
+      <div class="text-light">Dagsoft</div>
+    </div>
+  </div>
+</div>

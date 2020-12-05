@@ -1,0 +1,45 @@
+<form class="needs-validation" novalidate [formGroup]="form">
+  <div class="card border-primary mb-3">
+    <div class="card-header">
+      <h4>Empresa: <small class="text-secondary">{{ form.controls['nomeReal'].value }}</small></h4>
+    </div>
+    <div class="card-body text-primary">
+      <div class="form-row mb-3">
+        <div class="col-sm-12">
+          <label for="codigo">Código</label>
+          <input [readonly]="edit" type="text" class="form-control" id="codigo" placeholder="Código" formControlName="codigo"  [ngClass]="{'is-invalid': submitted && hasError('codigo')}" />          
+          <div class="valid-feedback"></div>
+          <div class="invalid-feedback" *ngIf="hasError('codigo') && hasError('codigo')['required']">
+            Por favor informe um código para a empresa.
+          </div>
+        </div>
+      </div>
+      <div class="form-row mb-3">
+        <div class="col-sm-12">
+          <label for="nomeReal">Nome Real</label>
+          <input type="text" class="form-control" id="nomeReal" placeholder="Nome Real" formControlName="nomeReal" [ngClass]="{ 'is-invalid': submitted && hasError('nomeReal')}" />
+          <div class="valid-feedback"></div>
+          <div class="invalid-feedback" *ngIf="hasError('nomeReal') && hasError('nomeReal')['required']">
+            Por favor informe um nome real para a empresa.
+          </div>
+        </div>
+      </div>
+      <div class="form-row mb-3">
+        <div class="col-sm-12">
+          <label for="nomeFantasia">Nome Fantasia</label>
+          <input type="text" class="form-control" id="nomeFantasia" placeholder="Nome Fantasia" formControlName="nomeFantasia" [ngClass]="{ 'is-invalid': submitted && hasError('nomeFantasia')}"/>
+          <div class="valid-feedback"></div>
+          <div class="invalid-feedback" *ngIf="hasError('nomeFantasia') && hasError('nomeFantasia')['required']">
+            Por favor informe um nome fantasia para a empresa.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row btn-row form-row-btn">
+    <button class="btn btn-outline-secondary mr-2" (click)="onBack()">Voltar</button>
+    <button class="btn btn-outline-primary" (click)="onSubmit()">Salvar</button>
+  </div>
+
+</form>

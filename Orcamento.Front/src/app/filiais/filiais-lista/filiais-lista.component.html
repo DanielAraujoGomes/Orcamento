@@ -1,0 +1,95 @@
+<div class="card">
+  <div class="card-header">
+    <div class="float-left text-primary">
+      <span class="icon icon-home3 title"></span>
+      <h4 class="title">Filiais</h4>
+    </div>
+    <div class="float-right">
+      <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group mr-2" role="group" aria-label="First group">
+          <button type="button" class="btn btn-outline-primary" [routerLink]="['novo']">Nova</button>
+          <button type="button" class="btn btn-outline-primary" (click)="onRefresh()">Atualizar</button>
+          <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed"
+            [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">Filtrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+
+    <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true" class="bg-light mb-3 rounded shadow-sm">
+      <form class="needs-validation" novalidate [formGroup]="form">
+        <div class="form-row pr-3 pl-3">
+          <div class="col-sm-4 mb-3">
+            <label class="col-form-label" for="codigo">#</label>
+            <input type="text" class="form-control" id="codigo" placeholder="Código" formControlName="codigo" />
+          </div>
+          <div class="col-sm-8 mb-3">
+            <label class="col-form-label" for="nome">Filial</label>
+            <input type="text" class="form-control" id="nome" placeholder="Filial" formControlName="nome" />
+          </div>
+        </div>
+        <div class="form-row pr-3 pl-3">
+          <div class="col-sm-12 mb-3 text-right">
+            <button type="button" class="btn btn-outline-primary" (click)="onFilterConfirm()">Aplicar Filtro</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <table class="table table-striped mobile-optimised" *ngIf="filialLista; else loading">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Filial</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let filial of filialLista.data">
+          <td data-th="#">{{ filial.codigo }}</td>
+          <td data-th="Empresa">{{ filial.nome }}</td>
+          <td>
+            <span class="float-right">
+              <button class="btn btn-outline-info mb-1 btn-sm mr-2" (click)="onEdit(filial.codigo)">Atualizar</button>
+              <button class="btn btn-outline-danger mb-1 btn-sm" (click)="onDelete(filial.codigo)">Remover</button>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #loading>
+      <span>Carregando Filiais...</span>
+    </ng-template>
+  </div>
+  <div class="card-footer text-muted" *ngIf="filialLista && filialLista.pageCount > 1">
+    <div class="float-left">
+      <nav aria-label="Page navigation example" *ngIf="filialLista">
+        <ul class="pagination mb-0">
+          <li class="page-item">
+            <span class="page-link link-pointer" (click)="onPagination(1)">
+              <
+              <span class="sr-only">(current)</span>
+            </span>
+          </li>
+          <li class="page-item" *ngFor="let page of filialLista.pages" [ngClass]="{'active': page == filialLista.pageNow}" aria-current="page">
+            <span class="page-link" [ngClass]="{'link-pointer': page != filialLista.pageNow}" (click)="onPagination(page)">
+              {{ page }}
+              <span class="sr-only">(current)</span>
+            </span>
+          </li>
+          <li class="page-item">
+            <span class="page-link link-pointer" (click)="onPagination(filialLista.pageCount)">
+              >
+              <span class="sr-only">(current)</span>
+            </span>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="float-right text-primary pagination-ds">
+      {{filialLista.pageNow}} de {{filialLista.pageCount}} paginas ( {{filialLista.regCount}} itens )
+    </div>
+  </div>
+</div>

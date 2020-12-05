@@ -1,0 +1,125 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import 'assets/style/demo.css';
+
+.container-body {
+  padding-top: 70px;
+  padding-bottom: 60px;
+}
+
+.dropdown-toggle-menu:focus {
+  border-color: none !important;
+  outline: 0;
+}
+
+.navbar-icon {
+  outline: 0 !important;
+}
+
+.navbar-brand-ajuste {
+  height: 40px !important;
+  line-height: 37.5px !important;
+  padding-bottom: 0px !important;
+  padding-top: 0px !important;
+}
+
+.form-row-btn {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.row-footer {
+  line-height: 40px;
+}
+
+@media (min-width: 0px) and (max-width: 991.98px) {
+
+  .dropdown-item-md {
+    color: rgba($color: #ffffff, $alpha: 0.5);
+  }
+
+  .dropdown-item-md:hover {
+    color: #ffffff;
+    background-color: transparent !important;
+  }
+
+  .dropdown-menu-md {
+    background-color: transparent !important;
+    border: 0 !important;
+  }
+
+  /**/
+  table.mobile-optimised {
+		word-wrap:break-word;
+	}
+	table.mobile-optimised thead {
+		display:none
+	}
+	table.mobile-optimised td {
+		display:block;
+		float:left;/* ie9 and under hack */
+		width:100%;
+		clear:both;
+    color: dimgray;
+		padding:10px 10px;
+		-moz-box-sizing:border-box;
+		-webkit-box-sizing:border-box;
+		box-sizing:border-box;
+  }
+
+	table.mobile-optimised tbody, table.mobile-optimised tr {
+		display:block
+  }
+
+  .mobile-optimised tr {
+    border: soid 1px;
+    padding: 10px;
+    background:#f5f5f5;
+    border-radius: 1rem;
+  }
+
+  .mobile-optimised td:before {
+		content:attr(data-th);
+		display:block;
+		font-weight:bold;
+		margin:0 0 2px;
+    color:#000;
+	}
+	.mobile-optimised tbody tr {
+		float:left;width:100%;
+    margin-bottom:10px;
+	}
+  /**/
+}
+
+.link-pointer {
+  cursor: pointer;
+}
+
+.mb-0 {
+  margin-bottom: 0px !important;
+}
+
+.close {
+  outline: 0 !important;
+}
+
+.pagination-ds {
+  line-height: 38px !important;
+}
+
+.btn {
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+h4.title {
+  display: inline-block !important;
+}
+
+span.icon.title {
+  font-size: 30px;
+    padding: 5px;
+}
+
+
